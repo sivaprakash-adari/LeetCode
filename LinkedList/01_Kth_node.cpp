@@ -15,11 +15,8 @@ ListNode* find_intersection_node(ListNode* headA, ListNode* headB) {
     ListNode* ptrB = headB;
     
     while (ptrA != ptrB) {
-        if (ptrA != nullptr)
-            ptrA = ptrA->next;
-
-        if (ptrB != nullptr)
-           ptrB = ptrB->next;
+        ptrA = (ptrA != nullptr) ? ptrA->next : headB;
+        ptrB = (ptrB != nullptr) ? ptrB->next : headA;
     }
 
     return ptrA;
