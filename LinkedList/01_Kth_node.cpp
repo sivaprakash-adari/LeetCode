@@ -11,27 +11,18 @@ struct ListNode {
 };
 
 ListNode* find_intersection_node(ListNode* headA, ListNode* headB) {
-    ListNode* temp_headA = headA;
-    ListNode* temp_headB = headB;
-    int attach = 0;
-   
-    while (temp_headA != nullptr) {
-         if (attach == 0 && temp_headA->next == nullptr) {
-             temp_headA->next = headB;
-             attach = 1;
-         }
-         
-         if (temp_headB->next == nullptr)
-             temp_headB->next = headA;
+    ListNode* ptrA = headA;
+    ListNode* ptrB = headB;
+    
+    while (ptrA != ptrB) {
+        if (ptrA != nullptr)
+            ptrA = ptrA->next;
 
-        if (temp_headA == temp_headB)
-            return temp_headA;
-
-        temp_headA = temp_headA->next;
-        temp_headB = temp_headB->next;
+        if (ptrB != nullptr)
+           ptrB = ptrB->next;
     }
 
-    return nullptr;
+    return ptrA;
 }
 
 void displayNodes(ListNode* node)  { 
@@ -46,7 +37,7 @@ int main() {
     ListNode *headA, *prevA;
     ListNode *headB, *prevB;
 
-    for (int i = 1; i < 20 ; i++) {
+    for (int i = 1; i < 10 ; i++) {
         ListNode *node= new ListNode(i);
         if (i < 6) {
             if (i == 1) 
@@ -75,6 +66,8 @@ int main() {
     displayNodes(headB);
 
     ListNode *intersect_node = find_intersection_node(headA, headB);
-    
-    cout << "Inersection node val = " << intersect_node->val << endl;
+    if (intersect_node != nullptr)
+        cout << "Intersection node val = " << intersect_node->val << endl;
+    else 
+        cout << "No intersection node " << endl;
 }
